@@ -2,25 +2,27 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+//definindo o template engine
+app.set("view engine", "ejs");
+
 //mvc - model view controller
 
-//DEFININDO OS ARQUIVOS ESTÁTICOS - HTML
-const staticFolder = path.join(__dirname, "views");
-const expressStatic = express.static(staticFolder);
-app.use(expressStatic);
+//DEFININDO OS ARQUIVOS ESTÁTICOS - HTML - se não usar o ejs
+//app.use(express.static(path.join(__dirname, "views")));
 
 //DEFININDO OS ARQUIVOS PUBLICOS
-const publicFolder = path.join(__dirname, "public");
-const expressPublic = express.static(publicFolder);
-app.use(expressPublic);
+//const publicFolder = path.join(__dirname, "public");
+//const expressPublic = express.static(publicFolder);
+//pp.use(expressPublic);
+app.use(express.static(path.join(__dirname, "public")));
 
 //ROTAS
 app.get("/", (req, res) => {
-  res.render("views/index");
+  res.render("index");
 });
 
-app.get("/sobre", (req, res) => {
-  res.send("Sobre");
+app.get("/posts", (req, res) => {
+  res.render("posts");
 });
 
 //404 error (not found)
