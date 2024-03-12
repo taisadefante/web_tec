@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/head.ejs') %>
+  <head>
+    <%- include('partials/head.ejs') %>
+  </head>
 
   <body>
     <%- include('partials/header.ejs') %>
 
-    <h1>Posts</h1>
-    <h2>Veja abaixo alguns posts</h2>
+    <section class="container">
+      <%- include('partials/navbar.ejs') %>
+
+      <article>
+        <h1>Posts</h1>
+
+        <div class="posts">
+          <% posts.forEach((item) =>{%>
+          <div class="post">
+            <h3><%= item.title %></h3>
+            <p><%= item.text %></p>
+
+            <% if(item.stars) { %> <% for( let index = 0; index < item.stars;
+            index++ ) { %>
+            <img
+              src="https://cdn.iconscout.com/icon/free/png-256/start-bookmark-favorite-shape-rank-16-28621.png"
+              width="20px "
+            />
+            <% } %> <% } %>
+          </div>
+        </div>
+        <% }) %>
+      </article>
+    </section>
 
     <%- include('partials/footer.ejs') %>
   </body>

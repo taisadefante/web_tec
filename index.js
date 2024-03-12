@@ -18,11 +18,33 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //ROTAS
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    title: "Dgital Tech - Home",
+  });
 });
 
 app.get("/posts", (req, res) => {
-  res.render("posts");
+  res.render("posts", {
+    title: "Dgital Tech - Posts",
+    posts: [
+      {
+        title: "Novidade no mundo da tecnologia",
+        text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sequi quia, sapiente necessitatibus, quae numquam harum nulla, deleniti porro officiis eveniet. Excepturi ut, libero quidem ullam illum enim aspernatur quia. ",
+        stars: 3,
+      },
+
+      {
+        title: "Criando servidor com node.js",
+        text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sequi quia, sapiente necessitatibus, quae numquam harum nulla, deleniti porro officiis eveniet. Excepturi ut, libero quidem ullam illum enim aspernatur quia. ",
+      },
+
+      {
+        title: "Javascript é a linguagem mais usada no mundo",
+        text: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus sequi quia, sapiente necessitatibus, quae numquam harum nulla, deleniti porro officiis eveniet. Excepturi ut, libero quidem ullam illum enim aspernatur quia. ",
+        stars: 5,
+      },
+    ],
+  });
 });
 
 //404 error (not found)
