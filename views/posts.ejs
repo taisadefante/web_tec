@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('partials/head.ejs') %>
-  </head>
+<head>
+  <%- include('partials/head.ejs') %>
+</head>
+<body>
+  <%- include('partials/header.ejs') %>
 
-  <body>
-    <%- include('partials/header.ejs') %>
+  <section class="container">
+    <%- include('partials/navbar.ejs') %>
 
-    <section class="container">
-      <%- include('partials/navbar.ejs') %>
+    <article class="content">
+      <h1>Posts</h1>
 
-      <article>
-        <h1>Posts</h1>
-
-        <div class="posts">
-          <% posts.forEach((item) =>{%>
+      <div class="posts">
+        <% posts.forEach((item) => { %>
           <div class="post">
             <h3><%= item.title %></h3>
             <p><%= item.text %></p>
 
-            <% if(item.stars) { %> <% for( let index = 0; index < item.stars;
-            index++ ) { %>
-            <img
-              src="https://cdn.iconscout.com/icon/free/png-256/start-bookmark-favorite-shape-rank-16-28621.png"
-              width="20px "
-            />
-            <% } %> <% } %>
+            <% if(item.stars) { %>
+              <% for( let index = 0; index < item.stars; index++ ) { %>
+                <img src="https://cdn.iconscout.com/icon/free/png-256/star-bookmark-favorite-shape-rank-16-28621.png" width="20">              
+              <% } %>
+            <% } %>
           </div>
-        </div>
         <% }) %>
-      </article>
-    </section>
+      </div>
+    </article>
+  </section>
 
-    <%- include('partials/footer.ejs') %>
-  </body>
-
-  <script src="/js/main.js"></script>
+  <%- include('partials/footer.ejs') %>
+  <%- include('partials/foot.ejs') %>  
+</body>
 </html>
