@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
+
 const app = express();
 
 //definindo o template engine
@@ -15,6 +17,9 @@ app.set("view engine", "ejs");
 //const expressPublic = express.static(publicFolder);
 //pp.use(expressPublic);
 app.use(express.static(path.join(__dirname, "public")));
+
+//habilita server para receber dados via post (formulário)
+app.use(express.urlencoded({ extended: true }));
 
 //ROTAS
 app.get("/", (req, res) => {
@@ -47,10 +52,35 @@ app.get("/posts", (req, res) => {
   });
 });
 
+app.get("/cadastro-post", (req, res) => {
+  const { c } = req.query;
+  res.render("cadastro-post", {
+    title: "Dgital Tech - cadastro post",
+    cadastrado: c,
+  });
+});
+
+app.post("/salvar-post", (req, res) => {
+  const { titulo, texto } = req.body;
+
+  const date = fs.readFileSync("./store/posts.json");
+  const posts = JSON.parse(date);
+
+  posts.push({
+    titulo,
+    texto,
+  });
+
+  const postsString = JSON.stringify(posts);
+
+  fs.writeFileSync("./store/posts.json", postsString);
+
+  res.redirect("/cadastro-post?c=1");
+});
+
 //404 error (not found)
 app.use((req, res) => {
   // middleware
-  res.send("Pagina não encontrada");
 });
 
 // EXECUTANDO O SERVIDOR
